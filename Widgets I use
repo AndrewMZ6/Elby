@@ -10,7 +10,7 @@ So I goiong to use next widgets of tkinter:
                 rate (tariff)
                 to pay
                 
-3. Enty - for: last month indication
+3. Entry - for: last month indication
                current month indication
                rate(tariff)
                
@@ -18,3 +18,4 @@ So I goiong to use next widgets of tkinter:
 
 
 5. Text - for: displaying fetched data
+               displaying the amount to pay
