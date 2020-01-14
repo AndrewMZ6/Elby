@@ -93,7 +93,7 @@ close_button.grid(row = 4, column = 1)
 #
 #  DATABASE
 #
-
+# Sqlite3 new comment
 
 
 root.mainloop()
