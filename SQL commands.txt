@@ -1,0 +1,17 @@
+Sql commands I use:
+
+create database <database_name>;
+
+show databases;                   # to check out if everything is OK
+
+use <database_name>;              # to create tables in THAT database
+
+create table <table_name>(column1_name <data_type>, column2_name <data_type>, ...);
+
+show tables;                      # to check out if everything is OK
+
+desc <table_name>;                # checking table
+
+select * from <table_name>;       # watching how table looks like
+
+INSERT INTO <table_name> VALUES(value1, value2, value3, ...);     # inserting rows
