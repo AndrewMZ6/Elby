@@ -79,6 +79,9 @@ rate_entry.grid(row = 2, column = 1)
 rate_label = tkinter.Label(frame_right, text = 'Тариф:')
 rate_label.grid(row = 2, column = 0, sticky = 'e')
 
+new_comment_label = tkinter.Label(frame_right, text = 'Новый кек')
+new_comment_label.grid(row = 3, column = 0, sticky = 'e')
+
 # Button for evaluating payment
 
 evaluate_button = tkinter.Button(frame_right, text = 'Подсчитать')
@@ -93,7 +96,11 @@ close_button.grid(row = 4, column = 1)
 #
 #  DATABASE
 #
-# Sqlite3 new comment
+# 
 
 
 root.mainloop()
+
+
+
+# 
