@@ -1,0 +1,20 @@
+So I goiong to use next widgets of tkinter:
+
+1. Button - for: close
+                 evalute the payment
+                 download data to DB
+                 fetch from DB
+                 
+2. Label - for: last month textbar
+                current month textbar
+                rate (tariff)
+                to pay
+                
+3. Enty - for: last month indication
+               current month indication
+               rate(tariff)
+               
+4. Listbox - for: choosing month to fetch data for
+
+
+5. Text - for: displaying fetched data
