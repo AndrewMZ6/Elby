@@ -16,3 +16,6 @@ SELECT * FROM <table_name>;       # watching how table looks like
 
 INSERT INTO <table_name> VALUES(value1, value2, value3, ...);     # inserting rows
 
+ALTER TABLE <table_name> ADD COLUMN <column_name> <column_data_type> [NULL | NOT NULL] [FIRST | AFTER <column_name>];   # adding column
+
+ALTER TABLE <table_name> DROP COLUMN <column_name>;       # deleting column
