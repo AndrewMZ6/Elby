@@ -11,6 +11,8 @@ c = conn.cursor()
 
 # And now we can write SQL queries through our cursor 'c'
 c.execute('SQL code')
+for example:
+c.execute('CREATE TABLE <table_name>')
 
 # Commiting changes
 conn.commit()
