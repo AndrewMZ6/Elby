@@ -19,3 +19,18 @@ conn.commit()
 
 # And closing connection
 conn.close()
+
+
+########################==============================
+
+c.execute('show tables')
+
+R = c.fetchall()
+
+R = [i[0] for i in R]
+
+print(R)
+
+########################==============================
+
+c = conn.cursor(buffered = True)
