@@ -1,6 +1,7 @@
 First of all need to import <SQL_library_name>
 for example:
-import sqlite3
+import sqlite3   # sqlite3 is a default python db that is integrated into python
+                 # otherwise we have to install sql connectors (using pip???)
 
 # Creating connection 
 conn = sqlite3.connect('database_name.db')
