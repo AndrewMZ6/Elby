@@ -10,7 +10,7 @@ CREATE TABLE <table_name>(column1_name <data_type>, column2_name <data_type>, ..
 
 SHOW TABLES;                      # to check out if everything is OK
 
-DESC<table_name>;                # checking table
+DESC <table_name>;                # checking table
 
 SELECT * FROM <table_name>;       # watching how table looks like
 
