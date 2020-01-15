@@ -33,4 +33,4 @@ print(R)
 
 ########################==============================
 
-c = conn.cursor(buffered = True)
+c = conn.cursor(buffered = True)     # When error // mysql.connector.errors.InternalError: Unread result found // rises
