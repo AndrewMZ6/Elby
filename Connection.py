@@ -25,8 +25,32 @@ class pess:
 
 		print(R)
 
+	def selectall(self, x):
+
+		self.cursor.execute('use my')
+
+		self.cursor.execute(x)
+
+		records = self.cursor.fetchall()
+
+		for row in records:
+			print(row)
+			print(type(row))
+
+		
+
+	def insert(self):
+
+		self.cursor.execute('use my')
+
+		self.cursor.execute('insert into elen values(3, "february", 666, 555, 111, 120)')
+
+		self.conn.commit()
+
+x = 'select * from elen'
+
 p = pess()
 
-p.show_me()
+p.selectall(x)
 
 input()
