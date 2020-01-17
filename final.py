@@ -4,9 +4,11 @@ import mysql.connector as mc
 
 #  DATABASE ------------ DATABASE ------------ DATABASE ------------ DATABASE ------------ DATABASE
 
+# the class for creating object by using which i can interract with mysql server on my local machine
+
 class pess:
 
-	def __init__(self):
+	def __init__(self):     # creating connection and cursor for sending querries
 
 		self.conn = mc.connect(host='localhost', user='root', password='89234037252')
 
@@ -16,15 +18,16 @@ class pess:
 
 		self.cursor = self.conn.cursor()
 
-		self.cursor.execute('use my')
+		self.cursor.execute('use my') # Using database my.db   I created it mysql WorkBench
 
 	
 
-	def selectall(self, list_month):
+	def selectall(self, list_month):  # method for sending SELECT * query
 
 		self.cursor.execute('select * from elen where month = ' + '"' + list_month + '"')
 
-		self.L = [i for i in self.cursor]
+		self.L = [i for i in self.cursor]     # creates list L that looks like this [(21, 'December', 18771, 17781, 990, 1980)], it's tuple inside the list
+
 
 
 	def insertion(self, nameMonth_str, current_month_str, last_month_str, itogo_kvt_str, itogo_rub_srt):  # CREATE
@@ -33,7 +36,7 @@ class pess:
 
 		self.conn.commit()
 
-	def show_months(self):                      # READ
+	def show_months(self):      # shows all months available in table to insert them into listbox widget                # READ
 
 		self.cursor.execute('select month from elen')
 
@@ -45,15 +48,15 @@ class pess:
 
 
 
-	def delete_months(self, month):             # DELETE
+	def delete_months(self, month):    # deletes row in Mysql DB with month chosen in listbox         # DELETE
 
 		self.cursor.execute('delete from elen where month =' + '"' + month + '"')
 
-		self.conn.commit()
+		self.conn.commit()   # I think I should create some sort of SUBMIT window for this to commit deletion
 
 
 
-p = pess()
+p = pess()  # creating object here so I can use it downstairs
 
 # #  DATABASE -----^^----- DATABASE -----^^----- DATABASE -----^^----- DATABASE -----^^----- DATABASE
 
@@ -69,14 +72,13 @@ p = pess()
 root = tkinter.Tk()
 root.geometry('500x300')
 
-# Listbox 
+# Listbox  ----------- for showing and choosing months to show and delete
 
 listbox1 = tkinter.Listbox(height=3, width=15)
 listbox1.place(x = 30, y = 30)
 
 
-
-# Textarea
+# Text  -------------  it's a place where I show info from DB
 
 text_show_data_fetched = tkinter.Text(height=8, width=15)
 text_show_data_fetched.place(x = 30, y = 130)
