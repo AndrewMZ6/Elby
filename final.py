@@ -6,54 +6,51 @@ import mysql.connector as mc
 
 class pess:
 
-    def __init__(self):
+	def __init__(self):
 
-        self.conn = mc.connect(host='localhost', user='root', password='89234037252')
+		self.conn = mc.connect(host='localhost', user='root', password='89234037252')
 
-        state = 'settled' if self.conn else 'not settled'
+		state = 'settled' if self.conn else 'not settled'
 
-        print('connection ' + state)
+		print('connection ' + state)
 
-        self.cursor = self.conn.cursor()
+		self.cursor = self.conn.cursor()
 
-    '''def show_me(self):
+		self.cursor.execute('use my')
 
-        self.cursor.execute('use my')
+	
 
-        self.cursor.execute('show tables')
+	def selectall(self, list_month):
 
-        R = self.cursor.fetchall()
+		self.cursor.execute('select * from elen where month = ' + '"' + list_month + '"')
 
-        R = [i[0] for i in R]
-
-        print(R)  '''
-
-    def selectall(self, list_month):
-
-        
-
-        self.cursor.execute('use my')
-
-        self.cursor.execute('select * from elen where month = ' + '"' + list_month + '"')
-
-        self.L = [i for i in self.cursor]
+		self.L = [i for i in self.cursor]
 
 
-    def insertion(self, nameMonth_str, current_month_str, last_month_str, itogo_kvt_str, itogo_rub_srt):
+	def insertion(self, nameMonth_str, current_month_str, last_month_str, itogo_kvt_str, itogo_rub_srt):  # CREATE
 
-        self.cursor.execute('use my')
+		self.cursor.execute('insert into elen(month, current_month, last_month, itogo_kvt, itogo_rub) values(' + '"'+ nameMonth_str + '"' + ',' + current_month_str + ',' + last_month_str + ',' + itogo_kvt_str + ',' + itogo_rub_srt + ')')
 
-        self.cursor.execute('insert into elen(month, current_month, last_month, itogo_kvt, itogo_rub) values(' + '"'+ nameMonth_str + '"' + ',' + current_month_str + ',' + last_month_str + ',' + itogo_kvt_str + ',' + itogo_rub_srt + ')')
+		self.conn.commit()
 
-        self.conn.commit()
+	def show_months(self):                      # READ
 
-    def show_months(self):
+		self.cursor.execute('select month from elen')
 
-        self.cursor.execute('use my')
+		self.f = [i for i in self.cursor]
 
-        self.cursor.execute('select month from elen')
 
-        self.f = [i for i in self.cursor]
+
+			# UPDATE
+
+
+
+	def delete_months(self, month):             # DELETE
+
+		self.cursor.execute('delete from elen where month =' + '"' + month + '"')
+
+		self.conn.commit()
+
 
 
 p = pess()
@@ -135,6 +132,7 @@ rate_label.place(x = 200, y = 180)
 # Button for evaluating payment
 
 def insertion():
+
 	rate = rate_entry.get()
 
 	nameMonth_str = name_month_enrty.get()
@@ -149,6 +147,13 @@ def insertion():
 
 	p.insertion(nameMonth_str, current_month_str, last_month_str, itogo_kvt_str, itogo_rub_srt)
 
+
+	rate_entry.delete(0, tkinter.END)
+	name_month_enrty.delete(0, tkinter.END)
+	current_month_entry.delete(0, tkinter.END)		# Clearing all input forms after button clicked
+	last_month_enrty.delete(0, tkinter.END)
+
+
 evaluate_button = tkinter.Button(text='Подсчитать', command = insertion)
 evaluate_button.place(x = 270, y = 230)
 
@@ -156,37 +161,57 @@ evaluate_button.place(x = 270, y = 230)
 
 def button_show():
 
-    text_show_data_fetched.delete(1.0, tkinter.END)
+	text_show_data_fetched.delete(1.0, tkinter.END) # Clean the form
 
-    selected_month = listbox1.get(tkinter.ACTIVE)
+	selected_month = listbox1.get(tkinter.ACTIVE)   # Get info from listbox1
 
-    p.selectall(selected_month)
+	p.selectall(selected_month)
 
-    print(p.L)
+	text_show_data_fetched.insert(1.0, 'Месяц = ' + p.L[0][1] + '\n' + 'прошл. = ' + str(p.L[0][2]) + '\n' + 'текущ. = ' + str(p.L[0][3]) + '\n' +  'итогоКВТ. = ' + str(p.L[0][4]) + '\n' + 'итогоРУБ. = ' + str(p.L[0][5]))
 
-    text_show_data_fetched.insert(1.0, p.L)
-
-    
+	
 button_fetch_data = tkinter.Button(text='Показать', command=button_show)
 
 button_fetch_data.place(x = 180, y = 230)
 
 def show_months():
-    
-    p.show_months()
 
-    list1 = p.f # creating list to insert to listbox
+	listbox1.delete(0, tkinter.END)
+	
+	p.show_months()
 
-    for i in list1:
-        listbox1.insert(tkinter.END, str(i[0]))
+	list1 = p.f # creating list to insert to listbox
 
-    print(list1, type(list1))
+	for i in list1:
+		listbox1.insert(tkinter.END, str(i[0]))
 
-    
+	
 
-button_show_months = tkinter.Button(text='месяцы', command=show_months)
+	
+
+button_show_months = tkinter.Button(text='Месяцы', command=show_months)
 
 button_show_months.place(x = 130, y = 40)
+
+def delete_months():
+
+	selected_month = listbox1.get(tkinter.ACTIVE)
+
+	p.delete_months(selected_month)
+
+	listbox1.delete(0, tkinter.END)
+
+	p.show_months()
+
+	list1 = p.f # creating list to insert to listbox
+
+	for i in list1:
+		listbox1.insert(tkinter.END, str(i[0]))
+
+
+button_delete_months = tkinter.Button(text='Удалить', command=delete_months)
+
+button_delete_months.place(x = 40, y = 90)
 
 # Button for closing the programm window
 
