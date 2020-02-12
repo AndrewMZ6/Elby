@@ -10,7 +10,7 @@ class pess:
 
 	def __init__(self):     # creating connection and cursor for sending querries
 
-		self.conn = mc.connect(host='localhost', user='root', password='89234037252')
+		self.conn = mc.connect(host='localhost', user='root', password='12345')
 
 		state = 'settled' if self.conn else 'not settled'
 
